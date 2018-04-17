@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1523722642 source:/home/liyunhao/Desktop/OperatingSystemCode/caozuoxitong/caozuoxitong1/main.cpp
+	<sys/types.h>
+	<wait.h>
+	<unistd.h>
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+
+1523722642 source:/home/liyunhao/Desktop/OperatingSystemCode/caozuoxitong1/main.cpp
+	<sys/types.h>
+	<wait.h>
+	<unistd.h>
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+
+1523722642 source:/home/liyunhao/Desktop/OperatingSystemCode/First/main.cpp
+	<sys/types.h>
+	<wait.h>
+	<unistd.h>
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+
