@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1523971240 source:e:\operatingsystemcode\ processscheduling\main.cpp
+	<sys/types.h>
+	<wait.h>
+	<unistd.h>
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+
