@@ -1,8 +1,8 @@
 /**
-* title :模拟进程调度---基于多级队列，输出甘特图
+* title :C++模拟进程调度---多线程加入信号量控制临界区
 * author : liyunhao
-* date:2018.04.17
-* time : 23:42
+* date:2018.04.24
+* time : 21:10
 */
 /*
 调度的思想，分为三级反馈队列。
@@ -17,6 +17,8 @@
 放入一级队列里面参与竞争。
 
 直到一级队列空则所有的进程执行完毕
+
+加了一个线程专门产生进程
 */
 
 #include<iostream>
@@ -25,12 +27,13 @@
 #include <stdlib.h>
 #include <windows.h>
 using namespace std;
+int mutex = 0;
 class tool{//工具类
 public:
     int timeInterval;
     tool(){
         srand((unsigned)time( NULL ));//设置随机数
-        timeInterval = 100;//进程执行的单位间隔
+        timeInterval = 10;//进程执行的单位间隔
     }
 
     int getRandom(int a,int b){//返回指定范围的随机数
@@ -214,6 +217,7 @@ public:
     }
     bool ajustLevelQueues(){
         cout<<"调整"<<endl;
+        Sleep(500);
         process* p[3];
         p[0] = findProFromListByRandom(2);//从第二级队列随机获取进程
         p[1] = findProFromListByRandom(2);//从第二级队列随机获取进程
@@ -264,8 +268,10 @@ public:
 class GanttChart{//输出甘特图的类
 public:
     string GamtString;
+    int proNum;
     GanttChart(){
         GamtString += "|";
+        proNum = 0;
 
     }
     bool add(process *p){
@@ -275,6 +281,10 @@ public:
             GamtString += temp;
         //}
         GamtString += "|";
+        proNum ++;
+        if(proNum!=0 && proNum % 25 ==0){
+            GamtString ="";//每隔25个清空一次甘特图
+        }
     }
     void print(){
         cout<<"                 该进程调度的甘特图："<<endl;
@@ -284,61 +294,82 @@ public:
     }
 
 };
+//主函数与线程的共享变量
+int currPro;
+tool tool1;
+processQueue proqueue;
+process *pro ;
+process *proPrint;
+GanttChart gant;
+int timeInterval;
 
 class index{
 public:
 
+
+    index(){
+        currPro = 0;
+
+        timeInterval = tool1.timeInterval;
+    }
+
     void IndexGo(){
-        tool tool1;
-        processQueue proqueue;
-        process* pro = NULL;
-        process* proPrint=NULL;
-        GanttChart gant;
-        int timeInterval = tool1.timeInterval;
-
-        for(int i=1;i<=25;i++){
-            //pro = new process(rand()%30,i);
-            int Len = tool1.getRandom(1,50);
-            pro = new process(i,i+5);
-            proqueue.processIncoming(pro);
-        }
-        int pcCounter=0;
-        //proqueue.findProFromListByRandom(1);
-        //cout<<"proqueue.List[0].size() :"<<proqueue.List[0].size()<<endl;
-
-        while(proqueue.List[0].size()>0){
-            if(proqueue.List[0].size()>0){
-                proPrint=proqueue.selectFromList1AndDoIt();
-                Sleep(proPrint->length * timeInterval);
-                gant.add(proPrint);
+        int proCountForPrint = 0;
+        while(1){
+            while(mutex==1);
+            mutex=1;//加锁保护临界区
+            cout<<"在主函数里面"<<endl;
+            for(int i=0;i<3;i++){
+                if(proqueue.List[0].size()>0){
+                    proPrint=proqueue.selectFromList1AndDoIt();
+                    Sleep(proPrint->length * timeInterval);
+                    gant.add(proPrint);
+                    proCountForPrint++;
+                }
             }
-            if(proqueue.List[0].size()>0){
-                proPrint=proqueue.selectFromList1AndDoIt();
-                Sleep(proPrint->length * timeInterval);
-                gant.add(proPrint);
 
-            }
-            if(proqueue.List[0].size()>0){
-                proPrint=proqueue.selectList1ByRondomAndDoIt();
-                Sleep(proPrint->length * timeInterval);
-                gant.add(proPrint);
-
-            }
-            //cout<<"proqueue.List[0].size() :"<<proqueue.List[0].size()<<endl;
             proqueue.ajustLevelQueues();
+            if(proCountForPrint!=0 && proCountForPrint % 24==0){
+               gant.print();
+            }
 
-
+            mutex=0;//解锁
+            Sleep(1000);//便于观察
         }
-        gant.print();
+
+
     }
 };
+
+
+DWORD WINAPI ThreadProc(LPVOID lpParameter)
+{
+
+
+    while(1){
+        while(mutex==1);
+        mutex = 1;          //加锁保护临界区
+        cout<<"在线程里面"<<endl;
+        int RandomPronum = tool1.getRandom(1,5);
+        for(int i = 0;i < RandomPronum;i++){//随机生成不同（1-5个）的进程
+            int Len = tool1.getRandom(1,50);
+            pro = new process(currPro,Len);
+            proqueue.processIncoming(pro);
+            currPro++;
+        }
+
+        mutex = 0;//解锁
+        Sleep(1000);//便于观察
+
+    }
+
+    return 0;
+}
 int main(){
     cout<<"模拟进程调度---基于多级队列"<<endl;
     index inde;
+    HANDLE hThread1 = CreateThread(NULL, 0, ThreadProc, NULL, 0, NULL);
     inde.IndexGo();
-    //for(int i = 0;i<10;i++){
-    //    cout<<inde.getRandom(4,50)<<endl;
-    //}
 
 
     return 0;
