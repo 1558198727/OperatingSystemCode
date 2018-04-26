@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1524173023 source:/home/liyunhao/Desktop/caozuoxitong/empty/main.cpp
+	"stdio.h"
+	<sys/shm.h>
+	<sys/unistd.h>
+	<sys/sem.h>
+	<stdlib.h>
+

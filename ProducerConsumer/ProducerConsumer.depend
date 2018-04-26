@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1524174377 source:/home/liyunhao/Desktop/caozuoxitong/ProducerConsumer/main.cpp
+	<stdio.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<unistd.h>
+	<stdlib.h>
+

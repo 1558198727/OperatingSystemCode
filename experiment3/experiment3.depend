@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1524692720 source:/home/liyunhao/Desktop/OperatingSystemCode/experiment3/main.cpp
+	<stdio.h>
+	<iostream>
+	<stdlib.h>
+	<sched.h>
+	<sys/types.h>
+	<sys/unistd.h>
+	<sys/time.h>
+	<sys/resource.h>
+
