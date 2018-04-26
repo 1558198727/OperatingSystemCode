@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1524777501 source:/home/liyunhao/Desktop/OperatingSystemCode/threeFork/main.cpp
+	<stdio.h>
+	<unistd.h>
+
