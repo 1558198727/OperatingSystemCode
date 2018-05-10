@@ -51,6 +51,8 @@ int cmtx_sem;
 int sem_val;
 int sem_flg;
 int shm_flg;
+
+
  #include "ipc.h"
 int get_ipc_id(char *proc_file,key_t key) {
     FILE *pf;
