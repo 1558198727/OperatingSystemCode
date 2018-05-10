@@ -34,9 +34,17 @@ key_t pput_key;  int pput_num;
 int *pput_ptr;
 
 //消费者取产品位置的共享指针
-key_t cget_key;  int cget_num;
+key_t cget_key;
+int cget_num;
 int *cget_ptr;
+int buff_num;
+int pput_num;
 
+key_t pput_h;
+key_t prod_h;
+key_t pmtx_h;
+key_t cons_h;
+key_t cmtx_h;
 //生产者有关的信号量
 key_t prod_key;
 key_t pmtx_key;
