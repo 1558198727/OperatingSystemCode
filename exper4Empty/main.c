@@ -34,7 +34,7 @@ int main(int argc,char *argv[]) {
 			if(buff_ptr[0]=='B'){
 				printf("%d The consumer has paper.\nThe consumer gets tobacco and glue\n",getpid());
 			}
-if(buff_ptr[0]=='C'){
+            if(buff_ptr[0]=='C'){
 				printf("%d The consumer has tobacco.\nThe consumer gets glue and paper\n",getpid());
 			}
 			*cget_ptr = (*cget_ptr+1);
