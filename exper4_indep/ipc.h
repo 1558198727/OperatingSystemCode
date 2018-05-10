@@ -39,12 +39,18 @@ int cget_num;
 int *cget_ptr;
 int buff_num;
 int pput_num;
+int buff_number;
+int pput_number;
+
 
 key_t pput_h;
 key_t prod_h;
 key_t pmtx_h;
 key_t cons_h;
 key_t cmtx_h;
+
+key_t buff_h;
+
 //生产者有关的信号量
 key_t prod_key;
 key_t pmtx_key;
