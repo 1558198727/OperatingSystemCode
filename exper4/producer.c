@@ -56,6 +56,7 @@ int main(int argc,char *argv[]) {
          up(pmtx_sem);
          //唤醒阻塞的消费者
          up(cons_sem);
+
      }
 return EXIT_SUCCESS;
 }
