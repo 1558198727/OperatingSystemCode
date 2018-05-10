@@ -3,7 +3,7 @@ int main(int argc,char *argv[]) {
 	int rate = 3;
 	int consumerid=atoi(argv[1]);
 	buff_h = 101;
-	buff_number = 1;
+	buff_number = 8;
 	cget_h = 103;
 	cget_number = 1;
 	shm_flg = IPC_CREAT | 0644;
