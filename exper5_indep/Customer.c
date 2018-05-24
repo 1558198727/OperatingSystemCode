@@ -70,13 +70,13 @@ int main(int argc,char *argv[])
             sofa_count++;
 
         } else if(wait_count < 13) {
-            printf("sofa is full £¬%d customer is waiting in the waiting room\n", i);
+            printf("sofa is full %d customer is waiting in the waiting room\n", i);
             wait_quest_flg = IPC_NOWAIT;
             msgsnd(wait_quest_id, &msg_arg, sizeof(msg_arg), wait_quest_flg);
             wait_count++;
 
         } else {
-            printf("waiting room is full £¬%d customer can't get into barber\n", i);
+            printf("waiting room is full %d customer can't get into barber shop\n", i);
          //   down(costomer_sem);
               msgrcv(sofa_respond_id, &msg_arg, sizeof(msg_arg), 0, 0);
               sofa_count--;
