@@ -45,9 +45,11 @@ int main(int argc,char *argv[])
         while(1) {
            //  wait_quest_flg=IPC_NOWAIT;
             //printf("%d barber is sleeping \n", getpid());
-            wait_quest_flg=0;
+            wait_quest_flg=IPC_NOWAIT;
 	    sleep(rate);
+	    
             if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
+		//printf("temp %d\n",temp);
                 msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
                 printf("%d barber is serving for %d customer \n", getpid(), msg_arg.mid);
                 
@@ -65,7 +67,7 @@ int main(int argc,char *argv[])
             while(1) {
                //  wait_quest_flg=IPC_NOWAIT;
                //printf("%d barber is sleeping\n", getpid());
-               wait_quest_flg=0;
+               wait_quest_flg=IPC_NOWAIT;
 		sleep(rate);
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
@@ -83,7 +85,7 @@ int main(int argc,char *argv[])
              while(1) {
              //  wait_quest_flg=IPC_NOWAIT;
                //printf("%d barber is sleeping\n", getpid());
-               wait_quest_flg=0;
+               wait_quest_flg=IPC_NOWAIT;
 		sleep(rate);
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
