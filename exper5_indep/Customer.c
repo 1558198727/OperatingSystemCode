@@ -54,7 +54,7 @@ int main(int argc,char *argv[])
                 i--;
                 //阻塞方式接收消息
                 msgrcv(wait_quest_id, &msg_arg, sizeof(msg_arg), 0, 0);
-                 printf("mid = %d ", msg_arg.mid);
+                printf("mid = %d ", msg_arg.mid);
                 msgsnd(wait_respond_id, &msg_arg,sizeof(msg_arg), 0);
                 printf("%d customer from waiting room to sofa\n", msg_arg.mid);
              //   up(costomer_sem);
@@ -76,7 +76,9 @@ int main(int argc,char *argv[])
             wait_count++;
 
         } else {
+
             printf("waiting room is full %d customer can't get into barber shop\n", i);
+
          //   down(costomer_sem);
               msgrcv(sofa_respond_id, &msg_arg, sizeof(msg_arg), 0, 0);
               sofa_count--;
