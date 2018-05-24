@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1526565174 source:e:\desktop\current\operatingsystemcode\memanage\main.cpp
+	<iostream>
+	<cstring>
+	<vector>
+	<algorithm>
+	<windows.h>
+
