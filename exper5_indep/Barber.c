@@ -48,7 +48,7 @@ int main(int argc,char *argv[])
             wait_quest_flg=0;
             if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                 msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                printf("%d barber is serving for %d customer бнбн\n", getpid(), msg_arg.mid);
+                printf("%d barber is serving for %d customer \n", getpid(), msg_arg.mid);
                 sleep(rate);
                 down(account_sem);
                 printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
@@ -64,7 +64,7 @@ int main(int argc,char *argv[])
                wait_quest_flg=0;
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                    printf("%d barber is serving for %d customer бнбн\n", getpid(), msg_arg.mid);
+                    printf("%d barber is serving for %d customer \n", getpid(), msg_arg.mid);
                     sleep(rate);
                     down(account_sem);
                     printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
@@ -81,7 +81,7 @@ int main(int argc,char *argv[])
                wait_quest_flg=0;
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                    printf("%d barber is serving for %d customer бнбн\n", getpid(), msg_arg.mid);
+                    printf("%d barber is serving for %d customer \n", getpid(), msg_arg.mid);
                     sleep(rate);
                     down(account_sem);
                     printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
