@@ -56,10 +56,10 @@ int main(int argc,char *argv[])
                 msgrcv(wait_quest_id, &msg_arg, sizeof(msg_arg), 0, 0);
                  printf("mid = %d ", msg_arg.mid);
                 msgsnd(wait_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                printf("%d号顾客从等候室坐入沙发\n", msg_arg.mid);
+                printf("%d customer from waiting room to sofa\n", msg_arg.mid);
              //   up(costomer_sem);
             } else {
-                printf("%d号新顾客坐入沙发\n", i);
+                printf("%d new customer sit sofa\n", i);
             }
 
             sofa_quest_flg=IPC_NOWAIT;
@@ -70,13 +70,13 @@ int main(int argc,char *argv[])
             sofa_count++;
 
         } else if(wait_count < 13) {
-            printf("沙发坐满，%d号顾客在等候室等候……\n", i);
+            printf("sofa is full ，%d customer is waiting in the waiting room\n", i);
             wait_quest_flg = IPC_NOWAIT;
             msgsnd(wait_quest_id, &msg_arg, sizeof(msg_arg), wait_quest_flg);
             wait_count++;
 
         } else {
-            printf("等候室满，%d顾客没有进入理发店\n", i);
+            printf("waiting room is full ，%d customer can't get into barber\n", i);
          //   down(costomer_sem);
               msgrcv(sofa_respond_id, &msg_arg, sizeof(msg_arg), 0, 0);
               sofa_count--;
