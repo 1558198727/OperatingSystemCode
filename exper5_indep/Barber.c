@@ -44,14 +44,14 @@ int main(int argc,char *argv[])
     if(pid1==0) {
         while(1) {
            //  wait_quest_flg=IPC_NOWAIT;
-            printf("%d号理发师睡眠\n", getpid());
+            printf("%d barber is sleeping \n", getpid());
             wait_quest_flg=0;
             if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                 msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                printf("%d号理发师为%d号顾客理发……\n", getpid(), msg_arg.mid);
+                printf("%d barber is serving for %d customer ……\n", getpid(), msg_arg.mid);
                 sleep(rate);
                 down(account_sem);
-                printf("%d号理发师收取%d号顾客交费\n", getpid(), msg_arg.mid);
+                printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
                 up(account_sem);
            }
         }
@@ -60,34 +60,34 @@ int main(int argc,char *argv[])
         if(pid2==0) {
             while(1) {
                //  wait_quest_flg=IPC_NOWAIT;
-               printf("%d号理发师睡眠\n", getpid());
+               printf("%d barber is sleeping\n", getpid());
                wait_quest_flg=0;
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                    printf("%d号理发师为%d号顾客理发……\n", getpid(), msg_arg.mid);
+                    printf("%d barber is serving for %d customer ……\n", getpid(), msg_arg.mid);
                     sleep(rate);
                     down(account_sem);
-                    printf("%d号理发师收取%d号顾客交费\n", getpid(), msg_arg.mid);
+                    printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
                     up(account_sem);
                } else {
-                    printf("%d号理发师睡眠\n", getpid());
+                    printf("%d barber is sleeping\n", getpid());
 
                }
             }
         } else {
              while(1) {
              //  wait_quest_flg=IPC_NOWAIT;
-               printf("%d号理发师睡眠\n", getpid());
+               printf("%d barber is sleeping\n", getpid());
                wait_quest_flg=0;
                if(msgrcv(sofa_quest_id, &msg_arg, sizeof(msg_arg), 0, wait_quest_flg)>=0) {
                     msgsnd(sofa_respond_id, &msg_arg,sizeof(msg_arg), 0);
-                    printf("%d号理发师为%d号顾客理发……\n", getpid(), msg_arg.mid);
+                    printf("%d barber is serving for %d customer ……\n", getpid(), msg_arg.mid);
                     sleep(rate);
                     down(account_sem);
-                    printf("%d号理发师收取%d号顾客交费\n", getpid(), msg_arg.mid);
+                    printf("%d barber is collect %d customer's money\n", getpid(), msg_arg.mid);
                     up(account_sem);
                } else {
-                    printf("%d号理发师睡眠\n", getpid());
+                    printf("%d barber is sleeping\n", getpid());
 
                }
             }
